@@ -1,4 +1,4 @@
-package github.com.felipebarbosaferreira.Task;
+package github.com.felipebarbosaferreira.task;
 
 import java.text.ParseException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package github.com.felipebarbosaferreira.Task;
+package github.com.felipebarbosaferreira.task;
 
 import java.util.Date;
 
