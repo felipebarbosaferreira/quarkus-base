@@ -53,8 +53,8 @@ public class TaskResource {
     		"&emsp; \"when\": \"2020-07-16T21:10:13.123-03:00\"<br>" + 
     		"}")
     // TODO - Make a bean to input
-    public void createTask(Task task) throws ParseException{
-        taskService.createTask(task);
+    public void saveTask(Task task) throws ParseException{
+        taskService.saveTask(task);
     }
 
     @PUT

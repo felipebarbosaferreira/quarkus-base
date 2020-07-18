@@ -25,8 +25,8 @@ public class TaskService {
 		return taskRepository.getAllByState(isDone);
 	}
 
-	public void createTask(Task task) throws ParseException {
-		taskRepository.createTask(
+	public void saveTask(Task task) throws ParseException {
+		taskRepository.saveTask(
 				new Task(task.getMacaddress(), task.getType(), task.getTitle(), task.getDescription(), task.getWhen()));
 	}
 	

@@ -2,30 +2,66 @@ package github.com.felipebarbosaferreira;
 
 import java.util.Date;
 
-import org.bson.types.ObjectId;
+import javax.inject.Inject;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import github.com.felipebarbosaferreira.task.Task;
 import github.com.felipebarbosaferreira.task.TaskRepository;
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
 
 @QuarkusTest
+@QuarkusTestResource(MongoDBLifeCycleControlTest.class)
 public class TaskRepositoryTest {
-	@InjectMock
+	@Inject
 	TaskRepository taskRepository;
-	
+
 	@Test
-	public void testGetById() {
+	public void testTaskRepositoryMocking() {
 		Assertions.assertEquals(0, taskRepository.count());
+		Assertions.assertTrue(taskRepository.getAll().isEmpty());
+
+		// persist a task
+		Task taskMock1 = taskMock("Quarkus Teste primeira tarefa");
+		taskRepository.saveTask(taskMock1);
+		Assertions.assertFalse(taskRepository.getAll().isEmpty());
+		Assertions.assertEquals(1, taskRepository.count());
+
+		// persist another task
+		Task taskMock2 = taskMock("Quarkus Teste segunda tarefa");
+		taskRepository.saveTask(taskMock2);
+		Assertions.assertEquals(2, taskRepository.count());
 		
-		Task task = new Task("02:15:B2:00:00:00", 2, "Teste task Quarkus Mockito", "Fazendo o teste do taskRepository", new Date());
-		ObjectId objectId = new ObjectId("5ec5b421e7e9d736feac78fd");
+		// find by id
+		Assertions.assertEquals(taskMock1, taskRepository.getById(taskMock1.getId()));
 		
-		Mockito.when(taskRepository.getById(objectId)).thenReturn(task);
-		Assertions.assertEquals(taskRepository.getById(objectId), task);
+		// get all
+		Assertions.assertEquals(2, taskRepository.getAll().size());
+		Assertions.assertEquals(2, taskRepository.getAllByState(Boolean.FALSE).size());
+		
+		// update task
+		Assertions.assertEquals(taskMock2, taskRepository.getAll().get(1));
+		Task updateTask2 = taskRepository.getAll().get(1);
+		updateTask2.done = true;
+		taskRepository.update(updateTask2);
+		Assertions.assertEquals(1, taskRepository.getAllByState(Boolean.TRUE).size());
+		Assertions.assertEquals(1, taskRepository.getAllByState(Boolean.FALSE).size());
+		Assertions.assertEquals(updateTask2, taskRepository.getById(updateTask2.getId()));
+		
+		// delete task
+		taskRepository.deleteTask(taskMock2.getId());
+		Assertions.assertEquals(1, taskRepository.getAll().size());
+		Assertions.assertEquals(1, taskRepository.getAllByState(Boolean.FALSE).size());
+		
+		taskRepository.deleteTask(taskMock1.getId());
+		Assertions.assertEquals(0, taskRepository.count());
+		Assertions.assertTrue(taskRepository.getAll().isEmpty());
+	}
+
+	public Task taskMock(String nameTask) {
+		return new Task("02:15:B2:00:00:00", 2, nameTask, "Descricao taskRepository " + nameTask, new Date());
 	}
 
 }

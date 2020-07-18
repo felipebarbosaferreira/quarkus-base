@@ -23,7 +23,7 @@ public class TaskRepository implements PanacheMongoRepository<Task> {
         return list("done", isDone);
     }
     
-    public void createTask(Task task) {
+    public void saveTask(Task task) {
     	persist(task);
     }
     
