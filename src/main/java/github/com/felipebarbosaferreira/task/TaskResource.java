@@ -35,7 +35,7 @@ public class TaskResource {
     }
 
     @GET
-    @Path("isDone={isDone}")
+    @Path("/isDone/{isDone}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Task> getAllByState(@PathParam("isDone") Boolean isDone){
         return taskService.getAllByState(isDone);

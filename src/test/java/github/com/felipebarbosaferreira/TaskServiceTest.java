@@ -97,7 +97,7 @@ public class TaskServiceTest {
 		Mockito.verify(taskRepository).deleteTask(Mockito.any(ObjectId.class));
 	}
 
-	public Task taskMock(String nameTask) {
-		return new Task("02:15:B2:00:00:00", 2, nameTask, "Descricao taskRepository " + nameTask, new Date());
+	private Task taskMock(String nameTask) {
+		return new Task("02:15:B2:00:00:00", 2, nameTask, "Descricao TaskServiceTest " + nameTask, new Date());
 	}
 }

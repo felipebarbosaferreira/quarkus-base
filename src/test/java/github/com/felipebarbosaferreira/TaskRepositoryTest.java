@@ -60,7 +60,7 @@ public class TaskRepositoryTest {
 		Assertions.assertTrue(taskRepository.getAll().isEmpty());
 	}
 
-	public Task taskMock(String nameTask) {
+	private Task taskMock(String nameTask) {
 		return new Task("02:15:B2:00:00:00", 2, nameTask, "Descricao taskRepository " + nameTask, new Date());
 	}
 
