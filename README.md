@@ -1,20 +1,45 @@
 # quarkus-base-mongodb
 Quarkus with MongoDB - Simple CRUD
 
+## Projeto base de Quarkus com MongoDB
+- @GET | @POST | @PUT | @DELETE
+- Quarkus Junit5
+- Quarkus MongoDB Panache
+- Quarkus MongoDB TestContainers
+- Docker
+- Quarkus Test Resource
+- Quarkus Test Service
+- Quarkus Test Repository
+
+
+#### Tempo de start em 0.023s do projeto nativo em Docker
+[![002_quarkus_started](002_quarkus_started.png)]
+
+#### Swagger UI
+[![001_swagger-ui](001_swagger-ui.png)]
+
+#### MongoDB
+[![003_mongodb_compass](003_mongodb_compass.png)]
+
+#### Health do projeto online
+[![004_health-ready](004_health-ready.png)]
+
 # quarkus-base-mongodb project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-@POST create Task
+```
+@POST save a new Task
 {
-  "description": "Quarkus testes criar tarefa",
+  "description": "Felipe Quarkus testes criar tarefa",
   "macaddress": "02:15:B2:00:00:00",
   "title": "Quarkus post",
   "type": 0,
   "when": "2020-07-16T20:29:00Z[UTC]"
 }
+```
 
 ## Running maven 
 mvn install
@@ -43,3 +68,7 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/quarkus-base-mongodb-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
+
+
+
+[Udemy Curso Base](https://www.udemy.com/share/102PukAkoYdVxQQnw=/)
